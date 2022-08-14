@@ -1,0 +1,10 @@
+version: "2"
+services:
+  smart-adder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: smart-adder-docker-compose
+    container_name: smart-adder-compose
+    ports:
+      - "8888:8080"
