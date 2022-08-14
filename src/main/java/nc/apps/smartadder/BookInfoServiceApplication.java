@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class BookInfoServiceApplication {
     public static void main(String[] args) throws IOException {
         String[] argsExtended = Arrays.copyOf(args,args.length+1);
-        argsExtended[argsExtended.length-1]="--spring.profiles.active="+System.getenv("profile");
+        argsExtended[argsExtended.length-1] = "--spring.profiles.active=" + System.getenv("profile");
         SpringApplication.run(BookInfoServiceApplication.class, argsExtended);
     }
 }

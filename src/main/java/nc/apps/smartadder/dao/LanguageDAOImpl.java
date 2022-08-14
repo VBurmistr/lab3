@@ -29,14 +29,14 @@ public class LanguageDAOImpl implements LanguageDAO {
 
 
     @Override
-    public Long save(Language language) throws DAOException {
+    public Integer save(Language language) throws DAOException {
         log.info("Add new author query:"+SQL_ADD_NEW);
         try(Connection con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement(SQL_ADD_NEW)){
             statement.setString(1,language.getLanguageName());
             ResultSet res = statement.executeQuery();
             if (res.next()) {
-                return res.getLong("id");
+                return res.getInt("id");
             }else{
                 return null;
             }
@@ -45,14 +45,14 @@ public class LanguageDAOImpl implements LanguageDAO {
         }    }
 
     @Override
-    public Long getIdByValues(Language language) throws DAOException {
+    public Integer getIdByValues(Language language) throws DAOException {
         log.info("Add new author query:"+SQL_GET_ID_BY_VALUES);
         try(Connection con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement(SQL_GET_ID_BY_VALUES)){
             statement.setString(1,language.getLanguageName());
             ResultSet res = statement.executeQuery();
             if (res.next()) {
-                return res.getLong("id");
+                return res.getInt("id");
             }else{
                 return null;
             }

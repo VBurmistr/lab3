@@ -28,14 +28,14 @@ public class PublisherDAOImpl implements PublisherDAO {
     public static final String SQL_GET_ID_BY_VALUES = "SELECT id from lab3_publisher_table where publisher_name = ? ";
 
     @Override
-    public Long save(Publisher publisher) throws DAOException {
+    public Integer save(Publisher publisher) throws DAOException {
         log.info("Add new author query:"+SQL_ADD_NEW);
         try(Connection con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement(SQL_ADD_NEW)){
             statement.setString(1,publisher.getPublisherName());
             ResultSet res = statement.executeQuery();
             if (res.next()) {
-                return res.getLong("id");
+                return res.getInt("id");
             }else{
                 return null;
             }
@@ -45,14 +45,14 @@ public class PublisherDAOImpl implements PublisherDAO {
     }
 
     @Override
-    public Long getIdByValues(Publisher publisher) throws DAOException {
+    public Integer getIdByValues(Publisher publisher) throws DAOException {
         log.info("Add new author query:"+SQL_GET_ID_BY_VALUES);
         try(Connection con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement(SQL_GET_ID_BY_VALUES)){
             statement.setString(1,publisher.getPublisherName());
             ResultSet res = statement.executeQuery();
             if (res.next()) {
-                return res.getLong("id");
+                return res.getInt("id");
             }else{
                 return null;
             }
