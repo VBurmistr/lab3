@@ -29,7 +29,7 @@ public class AuthorDAOImpl implements AuthorDAO {
 
 
     @Override
-    public Long save(Author author) throws DAOException {
+    public Integer save(Author author) throws DAOException {
         log.info("Add new author query:"+SQL_ADD_NEW);
         try(Connection con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement(SQL_ADD_NEW)){
@@ -37,7 +37,7 @@ public class AuthorDAOImpl implements AuthorDAO {
             statement.setString(2,author.getLastName());
             ResultSet res = statement.executeQuery();
             if (res.next()) {
-                return res.getLong("id");
+                return res.getInt("id");
             }else{
                 return null;
             }
@@ -47,7 +47,7 @@ public class AuthorDAOImpl implements AuthorDAO {
     }
 
     @Override
-    public Long getIdByValues(Author author) throws DAOException {
+    public Integer getIdByValues(Author author) throws DAOException {
         log.info("Add new author query:"+SQL_GET_ID_BY_VALUES);
         try(Connection con = dataSource.getConnection();
             PreparedStatement statement = con.prepareStatement(SQL_GET_ID_BY_VALUES)){
@@ -55,7 +55,7 @@ public class AuthorDAOImpl implements AuthorDAO {
             statement.setString(2,author.getLastName());
             ResultSet res = statement.executeQuery();
             if (res.next()) {
-                return res.getLong("id");
+                return res.getInt("id");
             }else{
                 return null;
             }

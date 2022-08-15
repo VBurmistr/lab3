@@ -31,25 +31,25 @@ public class BookSmartAdderService implements BookSmartAdder {
 
         Book book = bookApiFacade.getBookByTitleAndAuthor(title, author);
 
-        Long authorId = authorDAO.getIdByValues(book.getAuthor());
+        Integer authorId = authorDAO.getIdByValues(book.getAuthor());
         if (authorId == null) {
             authorId = authorDAO.save(book.getAuthor());
         }
         book.getAuthor().setId(authorId);
 
-        Long categoryId = categoryDAO.getIdByValues(book.getCategory());
+        Integer categoryId = categoryDAO.getIdByValues(book.getCategory());
         if (categoryId == null) {
             categoryId = categoryDAO.save(book.getCategory());
         }
         book.getCategory().setId(categoryId);
 
-        Long languageId = languageDAO.getIdByValues(book.getLanguage());
+        Integer languageId = languageDAO.getIdByValues(book.getLanguage());
         if (languageId == null) {
             languageId = languageDAO.save(book.getLanguage());
         }
         book.getLanguage().setId(languageId);
 
-        Long publisherId = publisherDAO.getIdByValues(book.getPublisher());
+        Integer publisherId = publisherDAO.getIdByValues(book.getPublisher());
         if (publisherId == null) {
             publisherId = publisherDAO.save(book.getPublisher());
         }

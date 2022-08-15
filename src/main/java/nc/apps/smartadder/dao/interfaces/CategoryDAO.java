@@ -4,7 +4,7 @@ import nc.apps.smartadder.dao.exception.DAOException;
 import nc.apps.smartadder.domain.Category;
 
 public interface CategoryDAO {
-    Long save(Category category) throws DAOException;
-    Long getIdByValues(Category category) throws DAOException;
+    Integer save(Category category) throws DAOException;
+    Integer getIdByValues(Category category) throws DAOException;
 
 }

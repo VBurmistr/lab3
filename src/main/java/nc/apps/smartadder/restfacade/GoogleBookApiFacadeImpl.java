@@ -1,5 +1,6 @@
 package nc.apps.smartadder.restfacade;
 
+import lombok.extern.slf4j.Slf4j;
 import nc.apps.smartadder.domain.Book;
 import nc.apps.smartadder.dto.Item;
 import nc.apps.smartadder.dto.Response;
@@ -15,12 +16,14 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @Repository
+@Slf4j
 public class GoogleBookApiFacadeImpl implements BookApiFacade {
     @Override
     @Cacheable("books")
     public Book getBookByTitleAndAuthor(String title, String author) throws RestFacadeException {
+        log.info("Preparing request too google.");
         String url = "https://www.googleapis.com/books/v1/volumes?q=intitle:%s+inauthor:%s".formatted(title, author);
-        System.out.println(url);
+        log.info("Link: "+url);
         RestTemplate restTemplate = new RestTemplate();
         Response response = restTemplate.getForObject(url, Response.class);
         if (response == null || response.getItems() == null) {
@@ -35,5 +38,7 @@ public class GoogleBookApiFacadeImpl implements BookApiFacade {
                             b.getPublisher() != null &&
                             b.getTitle() != null
                 ).findFirst();
-        return bookInfoOptional.map(VolumeInfoToBookDomain::map).orElse(null);    }
+        return bookInfoOptional.map(VolumeInfoToBookDomain::map)
+                .orElseThrow(()->new RestFacadeException("Cant find book that satisfying all fields."));
+    }
 }
