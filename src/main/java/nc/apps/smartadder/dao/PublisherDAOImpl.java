@@ -13,13 +13,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Repository
 @Slf4j
 public class PublisherDAOImpl implements PublisherDAO {
 
     private final DataSource dataSource;
 
-    @Autowired
     public PublisherDAOImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }

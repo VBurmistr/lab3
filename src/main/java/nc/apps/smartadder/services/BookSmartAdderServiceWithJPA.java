@@ -15,7 +15,6 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-@Primary
 public class BookSmartAdderServiceWithJPA implements BookSmartAdder {
 
     private final CategoryRepository categoryRepository;

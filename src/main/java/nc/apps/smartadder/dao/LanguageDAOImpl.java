@@ -13,13 +13,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Repository
 @Slf4j
 public class LanguageDAOImpl implements LanguageDAO {
 
     private final DataSource dataSource;
 
-    @Autowired
     public LanguageDAOImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }

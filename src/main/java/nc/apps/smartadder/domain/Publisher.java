@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "lab3_publisher_table")
 @Check(constraints = "ALTER TABLE lab3_publisher_table ADD CONSTRAINT lab3_publisher_table_check_publisher_name_not_empty CHECK (publisher_name <> '')")
 public class Publisher {

@@ -29,6 +29,7 @@ public class Book extends BookBaseModel {
     @JoinColumn(name = "prequel_id")
     private Book prequel;
 
+    @Builder
     public Book(Integer id, String title, Author author, Category category, Language language, Publisher publisher, Book prequel) {
         super(id, title);
         this.author = author;
