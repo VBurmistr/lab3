@@ -23,7 +23,7 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean name="bookSmartAdderService" class="nc.apps.smartadder.services.BookSmartAdderService" primary="true">
+    <bean name="bookSmartAdderService" class="nc.apps.smartadder.services.BookSmartAdderService">
         <constructor-arg name="authorDAO" ref="authorDAO"/>
         <constructor-arg name="bookDAO" ref="bookDAO"/>
         <constructor-arg name="categoryDAO" ref="categoryDAO"/>

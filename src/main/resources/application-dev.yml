@@ -19,3 +19,5 @@ spring:
         order_by:
           default_null_ordering: last
         format_sql: true
+mockapi:
+  url: "https://62fb7b6aabd610251c09e7e5.mockapi.io/api/v1/getBookByTitleAndAuthor/"
