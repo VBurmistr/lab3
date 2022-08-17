@@ -14,18 +14,21 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(name = "lab3_author_table", uniqueConstraints = { @UniqueConstraint(columnNames = { "firstName", "lastName" }) })
-@Check(constraints = "ALTER TABLE lab3_author_table ADD CONSTRAINT lab3_author_table_check_first_name_not_empty CHECK (first_name <> '')," +
-        "ALTER TABLE lab3_author_table ADD CONSTRAINT lab3_author_table_check_last_name_not_empty CHECK (last_name <> '')")
+@Table(name = "lab3_author_table",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"firstName", "lastName"},
+                name = "lab3_author_table_first_name_last_name_key")})
+@Check(constraints = "first_name <> '' AND last_name <> ''")
 public class Author {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq")
-    @SequenceGenerator(name="my_seq",sequenceName="lab3_author_table_id_seq",allocationSize = 1)
+    @SequenceGenerator(name = "my_seq", sequenceName = "lab3_author_table_id_seq", allocationSize = 1)
     private Integer id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "author",fetch =FetchType.LAZY)
+    @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     private List<Book> books;
+
+    @Column
 
     private String firstName;
 

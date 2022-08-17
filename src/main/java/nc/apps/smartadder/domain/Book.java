@@ -1,6 +1,9 @@
 package nc.apps.smartadder.domain;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Check;
 
 import javax.persistence.*;
@@ -8,25 +11,26 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "lab3_book_table", uniqueConstraints = { @UniqueConstraint(columnNames = { "title", "author_id" }) })
-@Check(constraints = "ALTER TABLE lab3_book_table ADD CONSTRAINT lab3_book_table_check_prequel_not_same_id CHECK (id <> prequel_id)," +
-        "ALTER TABLE lab3_book_table ADD CONSTRAINT lab3_book_table_check_title_not_empty CHECK (title <> '')")
+@Table(name = "lab3_book_table",
+        uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "author_id"},
+                name = "lab3_book_table_title_author_id_key")})
 @Entity
+@Check(constraints = "id <> prequel_id AND title <> ''")
 public class Book extends BookBaseModel {
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "author_id",nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id", nullable = false, foreignKey = @ForeignKey(name = "lab3_book_table_author_id_fkey"))
     private Author author;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id",nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false, foreignKey = @ForeignKey(name = "lab3_book_table_category_id_fkey"))
     private Category category;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "language_id",nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "language_id", nullable = false, foreignKey = @ForeignKey(name = "lab3_book_table_language_id_fkey"))
     private Language language;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "publisher_id",nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "publisher_id", nullable = false, foreignKey = @ForeignKey(name = "lab3_book_table_publisher_id_fkey"))
     private Publisher publisher;
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "prequel_id")
+    @JoinColumn(name = "prequel_id", foreignKey = @ForeignKey(name = "lab3_book_table_prequel_id_fkey"))
     private Book prequel;
 
     @Builder
