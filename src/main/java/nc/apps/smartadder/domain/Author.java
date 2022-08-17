@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "lab3_author_table", uniqueConstraints = { @UniqueConstraint(columnNames = { "firstName", "lastName" }) })
 @Check(constraints = "ALTER TABLE lab3_author_table ADD CONSTRAINT lab3_author_table_check_first_name_not_empty CHECK (first_name <> '')," +
         "ALTER TABLE lab3_author_table ADD CONSTRAINT lab3_author_table_check_last_name_not_empty CHECK (last_name <> '')")

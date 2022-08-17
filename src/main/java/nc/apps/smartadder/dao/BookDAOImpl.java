@@ -12,7 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-@Repository
 @Slf4j
 public class BookDAOImpl implements BookDAO {
 
@@ -28,7 +27,6 @@ public class BookDAOImpl implements BookDAO {
             "            VALUES\n" +
             "                (?, ?, ?, ?, ?)";
 
-    @Autowired
     public BookDAOImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }

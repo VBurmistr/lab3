@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean name="publisherDAO" class="nc.apps.smartadder.dao.PublisherDAOImpl">
+    <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean name="languageDAO" class="nc.apps.smartadder.dao.LanguageDAOImpl">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+
+    </bean>
+    <bean name="categoryDAO" class="nc.apps.smartadder.dao.CategoryDAOImpl">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+
+    </bean>
+    <bean name="authorDAO" class="nc.apps.smartadder.dao.AuthorDAOImpl">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean name="bookDAO" class="nc.apps.smartadder.dao.BookDAOImpl">
+        <constructor-arg name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean name="bookSmartAdderService" class="nc.apps.smartadder.services.BookSmartAdderService" primary="true">
+        <constructor-arg name="authorDAO" ref="authorDAO"/>
+        <constructor-arg name="bookDAO" ref="bookDAO"/>
+        <constructor-arg name="categoryDAO" ref="categoryDAO"/>
+        <constructor-arg name="languageDAO" ref="languageDAO"/>
+        <constructor-arg name="publisherDAO" ref="publisherDAO"/>
+        <constructor-arg name="bookApiFacade" ref="googleBookApiFacadeImpl"/>
+    </bean>
+
+</beans>

@@ -8,7 +8,6 @@ import nc.apps.smartadder.restfacade.interfaces.BookApiFacade;
 import nc.apps.smartadder.services.interfaces.BookSmartAdder;
 import org.springframework.stereotype.Service;
 
-@Service
 public class BookSmartAdderService implements BookSmartAdder {
 
     private final AuthorDAO authorDAO;

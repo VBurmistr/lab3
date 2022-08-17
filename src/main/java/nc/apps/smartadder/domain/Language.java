@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity
+@Builder
 @Table(name = "lab3_language_table")
 @Check(constraints = "ALTER TABLE lab3_language_table ADD CONSTRAINT lab3_language_table_check_language_not_empty CHECK (language <> '')")
 public class Language {

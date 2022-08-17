@@ -13,13 +13,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Repository
 @Slf4j
 public class CategoryDAOImpl implements CategoryDAO {
 
     private final DataSource dataSource;
 
-    @Autowired
     public CategoryDAOImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
