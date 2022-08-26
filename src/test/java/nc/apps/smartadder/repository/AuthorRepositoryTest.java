@@ -29,8 +29,10 @@ class AuthorRepositoryTest {
                 .build();
         authorRepository.save(authorExpected);
         Optional<Author> actualAuthor = authorRepository.findByFirstNameAndLastName(authorExpected.getFirstName(), authorExpected.getLastName());
-        actualAuthor.ifPresentOrElse(a->{
-            assertEquals(authorExpected.getFirstName()+authorExpected.getLastName(),a.getFirstName()+a.getLastName());
-        },() -> {throw new RuntimeException("No authors by given name and last name");});
+        if(actualAuthor.isPresent()){
+            assertEquals(authorExpected.getFirstName(),actualAuthor.get().getFirstName());
+        }else{
+            throw new RuntimeException("No languages by given name");
+        }
     }
 }

@@ -19,9 +19,9 @@ import java.util.List;
                 name = "lab3_author_table_first_name_last_name_key")})
 @Check(constraints = "first_name <> '' AND last_name <> ''")
 public class Author {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq")
-    @SequenceGenerator(name = "my_seq", sequenceName = "lab3_author_table_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @JsonIgnore
@@ -29,7 +29,6 @@ public class Author {
     private List<Book> books;
 
     @Column
-
     private String firstName;
 
     private String lastName;

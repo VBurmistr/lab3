@@ -17,13 +17,11 @@ import java.sql.SQLException;
 public class PublisherDAOImpl implements PublisherDAO {
 
     private final DataSource dataSource;
-
+    private static final String SQL_ADD_NEW = "INSERT INTO lab3_publisher_table (publisher_name) VALUES (?) ON CONFLICT DO NOTHING RETURNING id";
+    private static final String SQL_GET_ID_BY_VALUES = "SELECT id from lab3_publisher_table where publisher_name = ? ";
     public PublisherDAOImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-
-    public static final String SQL_ADD_NEW = "INSERT INTO lab3_publisher_table (publisher_name) VALUES (?) ON CONFLICT DO NOTHING RETURNING id";
-    public static final String SQL_GET_ID_BY_VALUES = "SELECT id from lab3_publisher_table where publisher_name = ? ";
 
     @Override
     public Integer save(Publisher publisher) throws DAOException {

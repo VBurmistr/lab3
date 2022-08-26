@@ -16,7 +16,8 @@ import java.sql.SQLException;
 public class BookDAOImpl implements BookDAO {
 
     private final DataSource dataSource;
-    public static final String SQL_ADD_NEW = "INSERT INTO\n" +
+
+    private static final String SQL_ADD_NEW = "INSERT INTO\n" +
             "                lab3_book_table (\n" +
             "                    title,\n" +
             "                    author_id,\n" +

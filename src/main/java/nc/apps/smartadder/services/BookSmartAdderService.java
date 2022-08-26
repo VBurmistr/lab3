@@ -3,6 +3,8 @@ package nc.apps.smartadder.services;
 import nc.apps.smartadder.dao.exception.DAOException;
 import nc.apps.smartadder.dao.interfaces.*;
 import nc.apps.smartadder.domain.Book;
+import nc.apps.smartadder.dto.bookdtos.BookDTO;
+import nc.apps.smartadder.mappers.DomainToDTOMapper;
 import nc.apps.smartadder.restfacade.exceptions.RestFacadeException;
 import nc.apps.smartadder.restfacade.interfaces.BookApiFacade;
 import nc.apps.smartadder.services.interfaces.BookSmartAdder;
@@ -26,7 +28,7 @@ public class BookSmartAdderService implements BookSmartAdder {
         this.bookDAO = bookDAO;
     }
 
-    public Book addNewBook(String title, String author) throws  DAOException, RestFacadeException {
+    public BookDTO addNewBook(String title, String author) throws  DAOException, RestFacadeException {
 
         Book book = bookApiFacade.getBookByTitleAndAuthor(title, author);
 
@@ -55,6 +57,6 @@ public class BookSmartAdderService implements BookSmartAdder {
         book.getPublisher().setId(publisherId);
         bookDAO.save(book);
 
-        return book;
+        return DomainToDTOMapper.mapBook(book);
     }
 }

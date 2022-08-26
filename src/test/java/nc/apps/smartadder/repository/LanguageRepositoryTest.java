@@ -29,8 +29,11 @@ class LanguageRepositoryTest {
                 .build();
         languageRepository.save(languageExpected);
         Optional<Language> actualLanguage = languageRepository.findByLanguageName(languageExpected.getLanguageName());
-        actualLanguage.ifPresentOrElse(a->{
-            assertEquals(languageExpected.getLanguageName(),a.getLanguageName());
-        },() -> {throw new RuntimeException("No languages by given name");});
+
+        if(actualLanguage.isPresent()){
+            assertEquals(languageExpected.getLanguageName(),actualLanguage.get().getLanguageName());
+        }else{
+            throw new RuntimeException("No languages by given name");
+        }
     }
 }

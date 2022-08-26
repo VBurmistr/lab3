@@ -23,15 +23,18 @@ class PublisherRepositoryTest {
     PublisherRepository publisherRepository;
 
     @Test
-    public void testAdding(){
+    void testAdding(){
         Publisher publisherExpected = Publisher.builder()
                 .publisherName("testName")
                 .build();
         publisherRepository.save(publisherExpected);
         Optional<Publisher> actualPublisher = publisherRepository.findByPublisherName(publisherExpected.getPublisherName());
-        actualPublisher.ifPresentOrElse(a->{
-            assertEquals(publisherExpected.getPublisherName(),a.getPublisherName());
-        },() -> {throw new RuntimeException("No publishers by given name");});
+
+        if(actualPublisher.isPresent()){
+            assertEquals(publisherExpected.getPublisherName(),actualPublisher.get().getPublisherName());
+        }else{
+            throw new RuntimeException("No languages by given name");
+        }
     }
   
 }

@@ -2,6 +2,8 @@ package nc.apps.smartadder.services;
 
 import nc.apps.smartadder.dao.exception.DAOException;
 import nc.apps.smartadder.domain.*;
+import nc.apps.smartadder.dto.bookdtos.BookDTO;
+import nc.apps.smartadder.mappers.DomainToDTOMapper;
 import nc.apps.smartadder.repository.*;
 import nc.apps.smartadder.restfacade.exceptions.RestFacadeException;
 import nc.apps.smartadder.restfacade.interfaces.BookApiFacade;
@@ -42,10 +44,10 @@ public class BookSmartAdderServiceWithJPA implements BookSmartAdder {
 
     @Transactional
     @Override
-    public Book addNewBook(String title, String author) throws  DAOException, RestFacadeException, ServiceException {
+    public BookDTO addNewBook(String title, String author) throws RestFacadeException, ServiceException {
         Book book = bookApiFacade.getBookByTitleAndAuthor(title, author);
 
-        Boolean bookExist = bookRepository.existsByTitleAndAuthorFirstNameAndAuthorLastName(
+        boolean bookExist = bookRepository.existsByTitleAndAuthorFirstNameAndAuthorLastName(
                 book.getTitle(),
                 book.getAuthor().getFirstName(),
                 book.getAuthor().getLastName());
@@ -73,6 +75,6 @@ public class BookSmartAdderServiceWithJPA implements BookSmartAdder {
 
         bookRepository.save(book);
 
-        return book;
+        return DomainToDTOMapper.mapBook(book);
     }
 }

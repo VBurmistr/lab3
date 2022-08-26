@@ -15,16 +15,12 @@ import java.sql.SQLException;
 
 @Slf4j
 public class AuthorDAOImpl implements AuthorDAO {
-
     private final DataSource dataSource;
-
+    private static final String SQL_ADD_NEW = "INSERT INTO lab3_author_table (first_name,last_name) VALUES (?,?) ON CONFLICT DO NOTHING RETURNING id";
+    private static final String SQL_GET_ID_BY_VALUES = "SELECT id from lab3_author_table where first_name = ? and last_name = ?";
     public AuthorDAOImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-
-    public static final String SQL_ADD_NEW = "INSERT INTO lab3_author_table (first_name,last_name) VALUES (?,?) ON CONFLICT DO NOTHING RETURNING id";
-    public static final String SQL_GET_ID_BY_VALUES = "SELECT id from lab3_author_table where first_name = ? and last_name = ?";
-
 
     @Override
     public Integer save(Author author) throws DAOException {

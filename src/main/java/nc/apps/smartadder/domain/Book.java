@@ -1,12 +1,12 @@
 package nc.apps.smartadder.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 import org.hibernate.annotations.Check;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,9 +29,13 @@ public class Book extends BookBaseModel {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "publisher_id", nullable = false, foreignKey = @ForeignKey(name = "lab3_book_table_publisher_id_fkey"))
     private Publisher publisher;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "prequel_id", foreignKey = @ForeignKey(name = "lab3_book_table_prequel_id_fkey"))
     private Book prequel;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "prequel", fetch = FetchType.LAZY)
+    private Set<Book> childs = new HashSet<>();
 
     @Builder
     public Book(Integer id, String title, Author author, Category category, Language language, Publisher publisher, Book prequel) {

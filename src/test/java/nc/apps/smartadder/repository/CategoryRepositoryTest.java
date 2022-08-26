@@ -28,8 +28,10 @@ class CategoryRepositoryTest {
                 .build();
         categoryRepository.save(categoryExpected);
         Optional<Category> actualCategory = categoryRepository.findByCategoryName(categoryExpected.getCategoryName());
-        actualCategory.ifPresentOrElse(a->{
-            assertEquals(categoryExpected.getCategoryName(),a.getCategoryName());
-        },() -> {throw new RuntimeException("No category's by given name and last name");});
+        if(actualCategory.isPresent()){
+            assertEquals(categoryExpected.getCategoryName(),actualCategory.get().getCategoryName());
+        }else{
+            throw new RuntimeException("No languages by given name");
+        }
     }
 }

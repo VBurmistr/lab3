@@ -22,7 +22,7 @@ public class GoogleBookApiFacadeImpl implements BookApiFacade {
     @Cacheable("books")
     public Book getBookByTitleAndAuthor(String title, String author) throws RestFacadeException {
         log.info("Preparing request too google.");
-        String url = "https://www.googleapis.com/books/v1/volumes?q=intitle:%s+inauthor:%s".formatted(title, author);
+        String url = String.format("https://www.googleapis.com/books/v1/volumes?q=intitle:%s+inauthor:%s",title, author);
         log.info("Link: "+url);
         RestTemplate restTemplate = new RestTemplate();
         Response response = restTemplate.getForObject(url, Response.class);

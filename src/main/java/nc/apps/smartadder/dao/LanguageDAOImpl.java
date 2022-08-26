@@ -17,13 +17,11 @@ import java.sql.SQLException;
 public class LanguageDAOImpl implements LanguageDAO {
 
     private final DataSource dataSource;
-
+    private static final String SQL_ADD_NEW = "INSERT INTO lab3_language_table ( language) VALUES (?) ON CONFLICT DO NOTHING RETURNING id";
+    private static final String SQL_GET_ID_BY_VALUES = "SELECT id from lab3_language_table where language = ? ";
     public LanguageDAOImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-
-    public static final String SQL_ADD_NEW = "INSERT INTO lab3_language_table ( language) VALUES (?) ON CONFLICT DO NOTHING RETURNING id";
-    public static final String SQL_GET_ID_BY_VALUES = "SELECT id from lab3_language_table where language = ? ";
 
 
     @Override

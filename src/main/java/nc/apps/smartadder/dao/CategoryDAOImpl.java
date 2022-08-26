@@ -17,13 +17,11 @@ import java.sql.SQLException;
 public class CategoryDAOImpl implements CategoryDAO {
 
     private final DataSource dataSource;
-
+    private static final String SQL_ADD_NEW = "INSERT INTO lab3_category_table (category_name) VALUES (?) ON CONFLICT DO NOTHING RETURNING id";
+    private static final String SQL_GET_ID_BY_VALUES = "SELECT id from lab3_category_table where category_name = ? ";
     public CategoryDAOImpl(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-
-    public static final String SQL_ADD_NEW = "INSERT INTO lab3_category_table (category_name) VALUES (?) ON CONFLICT DO NOTHING RETURNING id";
-    public static final String SQL_GET_ID_BY_VALUES = "SELECT id from lab3_category_table where category_name = ? ";
 
     @Override
     public Integer save(Category category) throws DAOException {

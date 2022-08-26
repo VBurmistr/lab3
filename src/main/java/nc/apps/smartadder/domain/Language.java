@@ -21,8 +21,7 @@ import java.util.List;
 @Check(constraints = "language <> ''")
 public class Language {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "my_seq")
-    @SequenceGenerator(name = "my_seq", sequenceName = "lab3_book_table_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @JsonIgnore
     @OneToMany(mappedBy = "language", fetch = FetchType.LAZY)

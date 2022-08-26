@@ -23,13 +23,10 @@ import java.util.Optional;
 @Primary
 @Slf4j
 public class MockApiFacadeImpl implements BookApiFacade {
-
+    private final String mockApiUrl;
     public MockApiFacadeImpl(@Value("${mockapi.url}") String mockApiUrl) {
         this.mockApiUrl = mockApiUrl;
     }
-
-    private final String mockApiUrl;
-
     @Override
     @Cacheable("books")
     public Book getBookByTitleAndAuthor(String title, String author) throws RestFacadeException {
