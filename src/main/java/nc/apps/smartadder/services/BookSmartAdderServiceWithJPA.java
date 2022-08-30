@@ -44,7 +44,7 @@ public class BookSmartAdderServiceWithJPA implements BookSmartAdder {
 
     @Transactional
     @Override
-    public BookDTO addNewBook(String title, String author) throws RestFacadeException, ServiceException {
+    public void addNewBook(String title, String author) throws RestFacadeException, ServiceException {
         Book book = bookApiFacade.getBookByTitleAndAuthor(title, author);
 
         boolean bookExist = bookRepository.existsByTitleAndAuthorFirstNameAndAuthorLastName(
@@ -74,7 +74,5 @@ public class BookSmartAdderServiceWithJPA implements BookSmartAdder {
         publisherOptional.ifPresent(book::setPublisher);
 
         bookRepository.save(book);
-
-        return DomainToDTOMapper.mapBook(book);
     }
 }

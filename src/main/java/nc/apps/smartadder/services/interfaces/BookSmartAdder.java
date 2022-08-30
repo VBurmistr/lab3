@@ -7,5 +7,5 @@ import nc.apps.smartadder.restfacade.exceptions.RestFacadeException;
 import nc.apps.smartadder.services.exceptions.ServiceException;
 
 public interface BookSmartAdder {
-    BookDTO addNewBook(String title, String author) throws DAOException, RestFacadeException, ServiceException;
+    void addNewBook(String title, String author) throws DAOException, RestFacadeException, ServiceException;
 }

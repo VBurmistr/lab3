@@ -28,7 +28,7 @@ public class BookSmartAdderService implements BookSmartAdder {
         this.bookDAO = bookDAO;
     }
 
-    public BookDTO addNewBook(String title, String author) throws  DAOException, RestFacadeException {
+    public void addNewBook(String title, String author) throws  DAOException, RestFacadeException {
 
         Book book = bookApiFacade.getBookByTitleAndAuthor(title, author);
 
@@ -56,7 +56,5 @@ public class BookSmartAdderService implements BookSmartAdder {
         }
         book.getPublisher().setId(publisherId);
         bookDAO.save(book);
-
-        return DomainToDTOMapper.mapBook(book);
     }
 }

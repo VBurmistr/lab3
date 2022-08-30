@@ -7,6 +7,7 @@ import io.github.bucket4j.Refill;
 import lombok.extern.slf4j.Slf4j;
 import nc.apps.smartadder.dao.exception.DAOException;
 import nc.apps.smartadder.domain.Book;
+import nc.apps.smartadder.dto.ResponseObject;
 import nc.apps.smartadder.dto.bookdtos.BookDTO;
 import nc.apps.smartadder.restfacade.exceptions.RestFacadeException;
 import nc.apps.smartadder.services.BookSmartAdderService;
@@ -39,10 +40,11 @@ public class MainRestController {
     }
 
     @PostMapping("/addsmart")
-    public ResponseEntity<BookDTO> getBookInfoByTitle(@RequestParam(required = false) String title,
-                                                      @RequestParam(required = false) String author) throws DAOException, ServiceException, RestFacadeException {
-        return new ResponseEntity<>(bookSmartAdder.addNewBook(title, author),
-                HttpStatus.OK);
-
+    public ResponseEntity<ResponseObject> getBookInfoByTitle(@RequestParam(required = false) String title,
+                                             @RequestParam(required = false) String author) throws DAOException, ServiceException, RestFacadeException {
+        bookSmartAdder.addNewBook(title, author);
+        ResponseObject responseObject = new ResponseObject();
+        responseObject.setSuccess(true);
+        return new ResponseEntity(responseObject,HttpStatus.OK);
     }
 }
