@@ -13,7 +13,7 @@
         </encoder>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>../logs/springMVCMaven-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <fileNamePattern>../logs/springBootSmartAdder-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
             <maxFileSize>1MB</maxFileSize>
             <maxHistory>30</maxHistory>
             <totalSizeCap>10MB</totalSizeCap>
@@ -21,20 +21,25 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="nc.apps.smartadder.controllers" level="debug" additivity="true">
+    <logger name="nc.apps.smartadder.controllers" level="debug" additivity="false">
         <appender-ref ref="RollingFile"/>
+        <appender-ref ref="STDOUT" />
     </logger>
-    <logger name="nc.apps.smartadder.dao" level="debug" additivity="true">
+    <logger name="nc.apps.smartadder.dao" level="debug" additivity="false">
         <appender-ref ref="RollingFile"/>
+        <appender-ref ref="STDOUT" />
     </logger>
-    <logger name="nc.apps.smartadder.services" level="debug" additivity="true">
+    <logger name="nc.apps.smartadder.services" level="debug" additivity="false">
         <appender-ref ref="RollingFile"/>
+        <appender-ref ref="STDOUT" />
     </logger>
-    <logger name="nc.apps.smartadder.repository" level="debug" additivity="true">
+    <logger name="nc.apps.smartadder.repository" level="debug" additivity="false">
         <appender-ref ref="RollingFile"/>
+        <appender-ref ref="STDOUT" />
     </logger>
-    <logger name="nc.apps.smartadder.restfacade" level="debug" additivity="true">
+    <logger name="nc.apps.smartadder.restfacade" level="debug" additivity="false">
         <appender-ref ref="RollingFile"/>
+        <appender-ref ref="STDOUT" />
     </logger>
     <logger name="org.hibernate.SQL" level="DEBUG">
         <appender-ref ref="RollingFile"/>

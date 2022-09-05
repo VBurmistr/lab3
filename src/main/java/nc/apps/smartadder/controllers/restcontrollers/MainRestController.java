@@ -40,8 +40,9 @@ public class MainRestController {
     }
 
     @PostMapping("/addsmart")
-    public ResponseEntity<ResponseObject> getBookInfoByTitle(@RequestParam(required = false) String title,
-                                             @RequestParam(required = false) String author) throws DAOException, ServiceException, RestFacadeException {
+    public ResponseEntity<ResponseObject> getBookInfoByTitle(@RequestParam(defaultValue = "") String title,
+                                             @RequestParam(defaultValue = "") String author) throws DAOException, ServiceException, RestFacadeException {
+        log.info("Searching for book by title:"+title+" and author:"+author);
         bookSmartAdder.addNewBook(title, author);
         ResponseObject responseObject = new ResponseObject();
         responseObject.setSuccess(true);

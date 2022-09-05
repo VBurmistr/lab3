@@ -28,7 +28,6 @@ public class MockApiFacadeImpl implements BookApiFacade {
         this.mockApiUrl = mockApiUrl;
     }
     @Override
-    @Cacheable("books")
     public Book getBookByTitleAndAuthor(String title, String author) throws RestFacadeException {
         log.info("Preparing request too mockapi.");
         String url = mockApiUrl+"books/"+Math.round(Math.random()*100);
@@ -36,7 +35,7 @@ public class MockApiFacadeImpl implements BookApiFacade {
         RestTemplate restTemplate = new RestTemplate();
         Book book = restTemplate.getForObject(url, Book.class);
         if (book == null) {
-            throw new RestFacadeException("Cant find your book on google");
+            throw new RestFacadeException("Cant find your book on mockapi");
         }
         return book;
     }
